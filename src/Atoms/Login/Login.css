@@ -1,0 +1,9 @@
+#loginButton{
+    background-color:darkred;
+    border: none;
+    color: white;
+}
+
+#loginButton:hover{
+    background-color:rgb(119, 25, 25);
+}
