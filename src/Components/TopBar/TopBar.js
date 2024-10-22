@@ -33,7 +33,6 @@ export default function TopBar() {
                         {isAuthenticated ? (
                             <>
                                 <Profile></Profile>
-                                <LogoutButton></LogoutButton>
                             </>
                         ):(
                             <LoginButton></LoginButton>
