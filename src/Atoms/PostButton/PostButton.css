@@ -1,0 +1,9 @@
+#buttonPost{
+    color: white;
+    background-color: black;
+    border: none;
+}
+
+#buttonPost:hover{
+    background-color:rgb(37, 37, 37);
+}

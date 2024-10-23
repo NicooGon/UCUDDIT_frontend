@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import LeftBar from '../LeftBar/LeftBar';
+import LeftBar from '../../Components/LeftBar/LeftBar';
 
 export default function SettingsScreen() {
     const {user} = useAuth0();

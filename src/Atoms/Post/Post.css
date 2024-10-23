@@ -1,0 +1,12 @@
+#inputPost{
+    background-color: rgb(94, 93, 93);
+    color: white;
+}
+
+#inputPost::placeholder{
+    color: rgb(202, 200, 200);
+}
+
+#imageIcon{
+    color: rgb(80, 79, 79);
+}
