@@ -1,12 +1,34 @@
-#inputPost{
-    background-color: rgb(94, 93, 93);
+#textPost{
+    background-color: rgb(76, 76, 76);
     color: white;
+    border: none;
+    resize: none;
 }
 
-#inputPost::placeholder{
-    color: rgb(202, 200, 200);
+#textPost:focus{
+    outline: none;
+}
+
+#textPost::placeholder{
+    color: rgb(168, 158, 158);
 }
 
 #imageIcon{
-    color: rgb(80, 79, 79);
+    color: rgb(80, 124, 153);
+}
+
+#textImage{
+    background-color: rgb(76, 76, 76);
+    border-color: white;
+}
+
+#postButton{
+    background-color: rgb(42, 74, 202); 
+    color: white;
+    border: none;
+    width: 13vh;
+}
+
+#postButton:hover{
+    background-color: rgb(50, 42, 202); 
 }
