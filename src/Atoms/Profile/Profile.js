@@ -14,7 +14,7 @@ export const Profile = () =>{
 
     return(
         isAuthenticated && (
-            <div className="col-2">
+            <div className="col-2 d-flex justify-content-center">
                 <button 
                     className=" img-fluid rounded-circle border border-white dropdown-toggle" 
                     id="profileButton"

@@ -1,5 +1,5 @@
 #textPost{
-    background-color: rgb(76, 76, 76);
+    background-color: rgb(59, 59, 59);
     color: white;
     border: none;
     resize: none;
@@ -18,7 +18,7 @@
 }
 
 #textImage{
-    background-color: rgb(76, 76, 76);
+    background-color: rgb(59, 59, 59);
     border-color: white;
 }
 

@@ -1,6 +1,6 @@
 import LeftBar from '../../Components/LeftBar/LeftBar';
 import './MainScreen.css';
-import Post from '../../Atoms/Post/Post'
+import Post from '../../Atoms/SubmitPost/SubmitPost'
 
 export default function MainScreen() {
     return (

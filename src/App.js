@@ -4,7 +4,7 @@ import SettingsScreen from './Pages/SettingsScreen/SettingsScreen';
 import TopBar from './Components/TopBar/TopBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import Post from './Atoms/Post/Post';
+import Post from './Atoms/SubmitPost/SubmitPost';
 
 function App() {
   return (
