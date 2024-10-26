@@ -2,6 +2,7 @@
     background-color:darkred;
     border: none;
     color: white;
+    padding: 0.1px 1.5vh;
 }
 
 #loginButton:hover{

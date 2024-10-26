@@ -1,10 +1,10 @@
 #container{
     background-color: black;
-    height: 6vh;
+    
 }
 
 #searchIconContainer{
-    height: 3vh;
+    height: 30px;
     background-color:rgb(67, 67, 67);
     border-right: none;
 }
@@ -15,16 +15,10 @@
 }
 
 #searchBar{
-    height: 3vh;
+    height: 30px;
     background-color:rgb(67, 67, 67);
 }
 
 #searchBar::placeholder {
     color: rgb(236, 233, 233);
-}
-
-
-
-#buttonProfile{
-    
 }

@@ -7,9 +7,9 @@ export const LogoutButton = () =>{
     
     const {logout} = useAuth0();
     return <button id="logoutButton" onClick={()=>logout({returnTo: window.location.origin})}>
-        <div className=" d-flex justify-content-start align-items-center ms-1">
+        <div className=" d-flex justify-content-center align-items-center ms-1">
             <FontAwesomeIcon icon={faRightFromBracket} />
-            <span className="ms-1">Logout</span>
+            <div className="ms-2">Logout</div>
         </div>
         </button>
 }
