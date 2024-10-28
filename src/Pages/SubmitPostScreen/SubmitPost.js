@@ -23,6 +23,19 @@ export default function SubmitPost() {
             <div className='col-12 col-md-10 d-flex flex-column justify-content-center align-items-center border border-secondary text-break' style={{ minHeight: '94.87vh', padding: '0', margin: '0' }} id='container'>
                 <label className="fw-bold fs-3 mb-3 text-center">Create a Post</label>
                 <div className="col-12 col-md-8 col-lg-6 custom-SubmitPost-container d-flex flex-column">
+                    <textarea 
+                        className="border border-secondary rounded p-3 mb-3" 
+                        id="textPost"
+                        rows="2"
+                        placeholder="Put a title!"
+                        maxLength={150}
+                        style={{
+                            width: '100%',
+                            fontSize: '1.5rem'
+                        }}
+                        onInput={typeInput}
+                        >           
+                    </textarea>
                     <div className="border border-secondary rounded p-3 mb-3" id="textImage">
                         <textarea
                             id="textPost"
@@ -31,7 +44,6 @@ export default function SubmitPost() {
                             maxLength={300}
                             style={{
                                 width: '100%',
-                                resize: 'none', 
                                 fontSize: '1.5rem'
                             }}
                             onInput={typeInput}
