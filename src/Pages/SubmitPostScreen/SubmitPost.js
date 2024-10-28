@@ -12,6 +12,11 @@ export default function SubmitPost() {
         document.getElementById('fileInput').click();
     };
 
+    const typeInput = (e) => {
+        e.target.style.height = 'auto'; 
+        e.target.style.height = `${e.target.scrollHeight}px`; 
+    };
+    
     return (
         <div className="container-fluid d-flex flex-column flex-md-row p-0">
             <LeftBar />
@@ -22,18 +27,20 @@ export default function SubmitPost() {
                         <textarea
                             id="textPost"
                             placeholder="Whatever you want!"
-                            rows="7"
+                            rows="3"
+                            maxLength={300}
                             style={{
                                 width: '100%',
                                 resize: 'none', 
                                 fontSize: '1.5rem'
                             }}
+                            onInput={typeInput}
                         ></textarea>
                         {image && (
                             <img
                                 src={image}
                                 className="img-fluid mb-3"
-                                style={{ maxHeight: '300px', width: '100%', objectFit: 'cover' }}
+                                style={{ maxHeight:'500px', width: '65%', objectFit: 'cover' }}
                                 alt="preview"
                             />
                         )}
@@ -57,7 +64,7 @@ export default function SubmitPost() {
 
                     <input
                         type="file"
-                        accept="image/*, video/*"
+                        accept="image/*"
                         id="fileInput"
                         style={{ display: 'none' }}
                         onChange={({ target: { files } }) => 

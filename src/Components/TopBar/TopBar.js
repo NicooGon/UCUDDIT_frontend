@@ -12,8 +12,8 @@ export default function TopBar() {
     const { isAuthenticated } = useAuth0();
     
     return (
-        <div className='container-fluid d-flex flex-wrap align-items-center border border-secondary p-2' id='container'>
-            <a href='/' className='d-flex align-items-center col-12 col-md-3 link-light link-underline-opacity-0 mb-2 mb-md-0'>
+        <div className='container-fluid d-flex flex-wrap align-items-center justify-content-between border border-secondary p-2' id='topBarContainer'>
+            <a href='/' className='d-flex align-items-center col-12 col-md-4 link-light link-underline-opacity-0 mb-2 mb-md-0'>
                 <img className='img-fluid ms-3' src={UcuLogo} alt="UCU Logo" style={{ height: '40px', width: 'auto' }} />
                 <label className='fs-2 fs-md-4 fw-bold ms-2'>UCUDDIT</label>
             </a>
@@ -30,7 +30,7 @@ export default function TopBar() {
                 />
             </div>
 
-            <div className='col-12 col-md-3 d-flex align-items-center justify-content-evenly'>
+            <div className='col-12 col-md-2 d-flex align-items-center justify-content-evenly'>
                 <PostButton />
                 {isAuthenticated ? (
                     <Profile />

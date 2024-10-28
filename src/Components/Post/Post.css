@@ -1,0 +1,43 @@
+#containerPost{
+    background-color:black;
+}
+
+#containerPost:hover{
+    background-color:rgb(43, 43, 43);
+    border-radius: 3%;
+}
+
+#likeButton{
+    background-color: transparent;
+    border: none;
+    height: 3vh;
+}
+
+#likeIcon{
+    color: white;
+}
+
+#dislikeButton{
+    background-color: transparent;
+    border: none;
+    height: 3vh;
+}
+
+#disLikeIcon{
+    color: white;
+}
+
+#likesContainer{
+    background-color:rgb(67, 67, 67);
+    width: 8vh;
+}
+
+#commentButton{
+    background-color: transparent;
+    border: none;
+}
+
+#containerComment{
+    background-color:rgb(67, 67, 67);
+    width: 8vh;
+}
