@@ -19,15 +19,15 @@ export default function SettingsScreen() {
                     }} 
                 />
                 <div className='col-5 text-break mb-4'>
-                    <label style={{ fontSize: '3rem' }}>Name: {user?.given_name}</label>
+                    <label style={{ fontSize: '2rem' }}>Name: {user?.given_name}</label>
                     <div className='col-12'  style={{ backgroundColor: 'white', height: '0.3vh'}}></div>
                 </div>
                 <div className='col-5 text-break mb-4'>
-                    <label style={{ fontSize: '3rem' }}>Usuario: {user?.name}</label>
+                    <label style={{ fontSize: '2rem' }}>User: {user?.name}</label>
                     <div className='col-12'  style={{ backgroundColor: 'white', height: '0.3vh'}}></div>
                 </div>
                 <div className='col-5 text-break mb-4'>
-                    <label style={{ fontSize: '3rem' }}>Email: {user?.email}</label>
+                    <label style={{ fontSize: '2rem' }}>Email: {user?.email}</label>
                     <div style={{ backgroundColor: 'white', height: '0.3vh' }}></div>
                 </div>
             </div>

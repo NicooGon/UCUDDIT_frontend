@@ -9,7 +9,7 @@ export const LogoutButton = () =>{
     return <button id="logoutButton" onClick={()=>logout({returnTo: window.location.origin})}>
         <div className=" d-flex justify-content-center align-items-center ms-1">
             <FontAwesomeIcon icon={faRightFromBracket} />
-            <div className="ms-2">Logout</div>
+            <div className="ms-2">Log Out</div>
         </div>
         </button>
 }

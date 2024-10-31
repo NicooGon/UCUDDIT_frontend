@@ -43,7 +43,7 @@ export const Profile = () => {
                         </li>
                         <li >
                             <div className="d-flex align-items-center ms-2">
-                                <LogoutButton  className="ms-4" />
+                                <LogoutButton  />
                             </div>
                             
                         </li>

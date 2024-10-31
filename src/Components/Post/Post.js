@@ -7,25 +7,44 @@ import { useState } from "react";
 
 
 export default function Post(){
-    const {user} = useAuth0();
-    const [like, setLike] = useState(true);
-    const [dislike, setDisLike] = useState(true);
+    const {user, isAuthenticated} = useAuth0();
+    const [likeButton, setlikeButton] = useState(true);
+    const [dislikeButton, setDislikeButton] = useState(true);
+    
 
-    const likePulsed= () =>{
-        setLike(!like);
-        if(!dislike)
+
+    const likeButtonPulsed= () =>{
+        if(isAuthenticated)
         {
-            setDisLike(true);
+            setlikeButton(!likeButton);
+            if(!dislikeButton)
+            {
+                setDislikeButton(true);
+            }
         }
+        else
+        {
+            alert("You must register or log in to rate.");
+        }
+        
     }
 
-    const disLikePulsed = () => {
-        setDisLike(!dislike);
-        if(!like)
-        {
-            setLike(true);
-        }
+    const dislikeButtonPulsed = () => {
+        if(isAuthenticated)
+            {
+                setDislikeButton(!dislikeButton);
+                if(!likeButton)
+                {
+                    setlikeButton(true);
+                }
+            }
+            else
+            {
+                alert("You must register or log in to rate.");
+            }
     };
+
+    
 
     return (
         
@@ -51,26 +70,26 @@ export default function Post(){
                 <div className="d-flex">
                     <div className="d-flex justify-content-center align-items-center rounded-5" id="likesContainer">
                         <button
-                            className="d-flex justify-content-center align-items-center fs-3 me-3"
+                            className="d-flex justify-content-center align-items-center fs-3 me-2"
                             id='likeButton'   
-                            onClick={likePulsed}
+                            onClick={likeButtonPulsed}
                         >
-                            {like ? (
-                                <FontAwesomeIcon id="likeIcon" className='fs-3' icon={faUpLong} />
+                            {likeButton ? (
+                                <FontAwesomeIcon id="likeIcon" className='fs-4' icon={faUpLong} />
                             ) : (
-                                <FontAwesomeIcon id="likeIcon" className='fs-3' style={{ color: 'lightBlue' }} icon={faUpLong} />
+                                <FontAwesomeIcon id="likeIcon" className='fs-4' style={{ color: 'lightBlue' }} icon={faUpLong} />
                             )}
                         </button>
-                        
+                        <div className="fs-4">1</div>
                         <button 
-                            className="d-flex justify-content-center align-items-center fs-3 ms-1"
+                            className="d-flex justify-content-center align-items-center fs-3 ms-2"
                             id='dislikeButton'
-                            onClick={disLikePulsed}    
+                            onClick={dislikeButtonPulsed}    
                         >  
-                            {dislike ? (
-                                <FontAwesomeIcon id="disLikeIcon" className='fs-3' icon={faDownLong} />
+                            {dislikeButton ? (
+                                <FontAwesomeIcon id="disLikeIcon" className='fs-4' icon={faDownLong} />
                             ) : (
-                                <FontAwesomeIcon id="disLikeIcon" className='fs-3' style={{ color: 'lightBlue' }} icon={faDownLong} />
+                                <FontAwesomeIcon id="disLikeIcon" className='fs-4' style={{ color: 'lightBlue' }} icon={faDownLong} />
                             )}
                         </button>
                     </div>

@@ -3,14 +3,24 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function PostButton() {
     const [postState, setPostState] = useState(false);
+    const {isAuthenticated} = useAuth0();
     const navigate = useNavigate();
 
     const togglePostTrue = () => {
-        setPostState(true);
-        navigate('/post');
+        if(isAuthenticated)
+        {
+            setPostState(true);
+            navigate('/post');
+        }
+        else
+        {
+            alert("You must register or log in to post.");
+        }
+        
     }
 
     const togglePostFalse = () => {
