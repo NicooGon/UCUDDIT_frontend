@@ -1,5 +1,5 @@
 import './App.css';
-import MainScreen from './Pages/CenterScreen/MainScreen';
+import MainScreen from './Pages//MainScreen/MainScreen';
 import SettingsScreen from './Pages/SettingsScreen/SettingsScreen';
 import TopBar from './Components/TopBar/TopBar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';

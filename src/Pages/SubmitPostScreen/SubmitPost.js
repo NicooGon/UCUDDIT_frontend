@@ -2,11 +2,16 @@ import LeftBar from "../../Components/LeftBar/LeftBar";
 import './SubmitPost.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import CreatePost from '../../Axios/createPost';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function SubmitPost() {
     const [image, setImage] = useState();
     const [fileName, setFileName] = useState();
+    const [title,setTitle] = useState();
+    const [content, setContent] = useState();
+    const {user} = useAuth0();
 
     const inputClick = () => {
         document.getElementById('fileInput').click();
@@ -16,6 +21,24 @@ export default function SubmitPost() {
         e.target.style.height = 'auto'; 
         e.target.style.height = `${e.target.scrollHeight}px`; 
     };
+
+    const saveTitle = (e) => {
+        setTitle(e.target.value);
+    }
+
+    const saveContent = (e) => {
+        setContent(e.target.value);
+    }
+   
+    const handlePost = async () => {
+            
+        const postData = {
+            user:{auth0id:user.sub},
+            title: title,
+            content: content,
+        };
+        const newPost = await CreatePost(postData);
+    }
     
     return (
         <div className="container-fluid d-flex flex-column flex-md-row p-0">
@@ -34,6 +57,7 @@ export default function SubmitPost() {
                             fontSize: '1.5rem'
                         }}
                         onInput={typeInput}
+                        onChange={saveTitle}
                         >           
                     </textarea>
                     <div className="border border-secondary rounded p-3 mb-3" id="textImage">
@@ -47,6 +71,7 @@ export default function SubmitPost() {
                                 fontSize: '1.5rem'
                             }}
                             onInput={typeInput}
+                            onChange={saveContent}
                         ></textarea>
                         {image && (
                             <img
@@ -69,7 +94,11 @@ export default function SubmitPost() {
                         </button>
                     </div>
                     <div className="d-flex justify-content-end mt-1">
-                        <button id="postButton" className="btn btn-primary rounded-5 fs-4">
+                        <button 
+                            id="postButton" 
+                            className="btn btn-primary rounded-5 fs-4"
+                            onClick={handlePost}
+                            >
                             Post
                         </button>
                     </div>
