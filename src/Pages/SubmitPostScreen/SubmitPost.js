@@ -51,7 +51,7 @@ export default function SubmitPost() {
                         id="textPost"
                         rows="2"
                         placeholder="Put a title!"
-                        maxLength={150}
+                        maxLength={50}
                         style={{
                             width: '100%',
                             fontSize: '1.5rem'

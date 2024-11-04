@@ -40,18 +40,21 @@ export default function MainScreen() {
             <LeftBar />
             <div className='col-12 col-md-10 d-flex flex-column align-items-center border border-secondary text-break' style={{ height: '94.87vh' }} id='container'>
             {posts.map(post => {
-            const { post_id, user, title, content, createdAt } = post;
-        
+            const { postId, user, title, content, createdAt, likes = 0 } = post;
+            
             return (
                 <Post 
-                    key={post_id}
+                    key={postId}
+                    postId={postId}
                     title={title} 
                     content={content} 
                     createdAt={createdAt} 
                     user={user} 
+                    likes={likes} 
                 />
             );
          })}
+
 
             </div>
         </div>

@@ -3,17 +3,36 @@ import "./Post.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpLong, faDownLong } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
-import { useState, useEffect} from "react";
+import { useEffect, useState } from "react";
+import saveTotalLikes from "../../Axios/sendTotalLikes";
 
-export default function Post({ title, content, user, createdAt }) {
+export default function Post({ title, content, user, createdAt, likes, postId }) {
     const { isAuthenticated } = useAuth0();
-    const [likeButton, setlikeButton] = useState(true);
+    const [likeButton, setLikeButton] = useState(true);
     const [dislikeButton, setDislikeButton] = useState(true);
-    
+    const [like, setLike] = useState(likes || 0); 
+
+    const handleRate = async () => {
+        const rateData = { 
+            post: { postId: postId },
+            likes: like,  
+        }; 
+        await saveTotalLikes(rateData);
+    };
+
+    useEffect(() => {
+        handleRate();
+    }, [like]);
+
     const likeButtonPulsed = () => {
         if (isAuthenticated) {
-            setlikeButton(!likeButton);
+            const newLikes = likeButton ? like + 1 : like - 1;
+            setLike(newLikes);
+            setLikeButton(!likeButton);
+            
             if (!dislikeButton) {
+                const newLikes = like + 2;
+                setLike(newLikes);
                 setDislikeButton(true);
             }
         } else {
@@ -23,27 +42,28 @@ export default function Post({ title, content, user, createdAt }) {
 
     const dislikeButtonPulsed = () => {
         if (isAuthenticated) {
+            const newLikes = dislikeButton ? like - 1 : like + 1;
+            setLike(newLikes);
             setDislikeButton(!dislikeButton);
+            handleRate(newLikes); 
+
             if (!likeButton) {
-                setlikeButton(true);
+                const newLikes = like - 2;
+                setLike(newLikes);
+                setLikeButton(true); 
             }
         } else {
             alert("You must register or log in to rate.");
         }
     };
 
-    const typeInput = (e) => {
-        e.target.style.height = 'auto'; 
-        e.target.style.height = `${e.target.scrollHeight}px`; 
-    };
-
     return (
-        <div className="col-5 border-3 rounded-4 mt-5">
+        <div className="col-12 col-md-5 border-3 rounded-4 mt-5">
             <div className='col-12' style={{ backgroundColor: 'rgb(57, 57, 57)', height: '0.1vh'}}></div>
-            <div className="d-flex flex-column justify-content-between mt-3" id='containerPost' onInput={typeInput} style={{ height: '50vh' }}>
-                <div className="d-flex align-items-center">
+            <div className="d-flex flex-column justify-content-between mt-3" id='containerPost'>
+            <div className="d-flex align-items-center">
                     <div
-                        className='img-fluid rounded-circle border border-white'
+                        className='circle rounded-circle border border-white'
                         style={{
                             backgroundImage: `url(${user?.imageUrl})`,
                             height: '40px',
@@ -51,52 +71,44 @@ export default function Post({ title, content, user, createdAt }) {
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                             backgroundRepeat: 'no-repeat',
+                            flexShrink: 0,
                         }}
                     />
-                    <label className="fs-5 ms-3"> {user?.name}</label>
+                    <label className="fs-5 ms-3">{user?.name}</label>
                     <label className="fs-5 ms-3">{createdAt}</label>
                 </div>
                 
-                <div className="d-flex flex-column align-items-start justify-content-start" style={{height:"80%"}}>
-                    <div>
-                        <label className="fs-1">{title}</label>
-                    </div>
-                    <div className="fs-2">
+                <div className="d-flex flex-column align-items-start justify-content-start text-start ">
+                    <label className="fs-2 text-light mb-3">{title}</label>
+                    <div className="fs-3" id="content">
                         <p>{content}</p>
                     </div>
                 </div>
 
-                <div className="d-flex">
-                    <div className="d-flex justify-content-center align-items-center rounded-5" id="likesContainer">
+                <div className="d-flex flex-column flex-md-row align-items-center mt-2">
+                    <div className="d-flex justify-content-center align-items-center rounded-5 me-md-4 mb-3 mb-md-0" id="likesContainer">
                         <button
-                            className="d-flex justify-content-center align-items-center fs-3 me-2"
+                            className="btn btn-light rounded-circle me-1"
                             id='likeButton'
                             onClick={likeButtonPulsed}
                         >
-                            {likeButton ? (
-                                <FontAwesomeIcon id="likeIcon" className='fs-4' icon={faUpLong} />
-                            ) : (
-                                <FontAwesomeIcon id="likeIcon" className='fs-4' style={{ color: 'lightBlue' }} icon={faUpLong} />
-                            )}
+                            <FontAwesomeIcon className='fs-4' style={{ color: likeButton ? 'white' : 'lightBlue' }} icon={faUpLong} />
                         </button>
-                        <div className="fs-4">0</div>
+                        <div className="fs-4">{like}</div>
                         <button 
-                            className="d-flex justify-content-center align-items-center fs-3 ms-2"
+                            className="btn btn-light rounded-circle ms-1"
                             id='dislikeButton'
                             onClick={dislikeButtonPulsed}
                         >  
-                            {dislikeButton ? (
-                                <FontAwesomeIcon id="disLikeIcon" className='fs-4' icon={faDownLong} />
-                            ) : (
-                                <FontAwesomeIcon id="disLikeIcon" className='fs-4' style={{ color: 'lightBlue' }} icon={faDownLong} />
-                            )}
+                            <FontAwesomeIcon className='fs-4' style={{ color: dislikeButton ? 'white' : 'lightBlue' }} icon={faDownLong} />
                         </button>
                     </div>
 
-                    <div className="d-flex justify-content-center align-items-center rounded-5 ms-4" id="containerComment">
-                        <button id="commentButton" className="d-flex justify-content-center align-items-center">
-                            <FontAwesomeIcon className='fs-3' icon={faComment} style={{ color: 'white' }} />
+                    <div className="d-flex ms-md-4 rounded-5" id="containerComment">
+                        <button id="commentButton" className="btn btn-light rounded-circle ms-1 me-1">
+                            <FontAwesomeIcon className='fs-4' icon={faComment} style={{ color: 'white' }} />
                         </button>
+                        <div className="fs-4 me-3">31</div>
                     </div>
                 </div>
             </div>

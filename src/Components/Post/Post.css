@@ -9,8 +9,7 @@
 
 #likeButton{
     background-color: transparent;
-    border: none;
-    height: 3vh;
+    border: none;;
 }
 
 #likeIcon{
@@ -20,7 +19,6 @@
 #dislikeButton{
     background-color: transparent;
     border: none;
-    height: 3vh;
 }
 
 #disLikeIcon{
@@ -29,7 +27,7 @@
 
 #likesContainer{
     background-color:rgb(67, 67, 67);
-    width: 8vh;
+    
 }
 
 #commentButton{
@@ -39,5 +37,8 @@
 
 #containerComment{
     background-color:rgb(67, 67, 67);
-    width: 8vh;
+}
+
+#content{
+    color: rgb(196, 196, 196);
 }
