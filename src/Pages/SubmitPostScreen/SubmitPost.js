@@ -31,7 +31,7 @@ export default function SubmitPost() {
     }
    
     const handlePost = async () => {
-            
+             
         const postData = {
             user:{auth0id:user.sub},
             title: title,

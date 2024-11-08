@@ -32,7 +32,7 @@ export const Profile = () => {
                         <li>
                             <a className="dropdown-item d-flex align-items-center" href="/user">
                                 <FontAwesomeIcon icon={faUser} />
-                                <span className="ms-2">View Profile</span>
+                                <span className="ms-2">My Activity</span>
                             </a>
                         </li>
                         <li>
