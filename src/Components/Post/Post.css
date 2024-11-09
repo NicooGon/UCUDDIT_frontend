@@ -30,6 +30,10 @@
     z-index: 3;
 }
 
+#likesContainer:hover{
+    background-color: rgb(72, 72, 72);
+}
+
 #commentButton{
     background-color: transparent;
     border: none;
@@ -38,6 +42,7 @@
 #containerComment{
     background-color:rgb(67, 67, 67);
 }
+
 
 #content{
     color: rgb(196, 196, 196);

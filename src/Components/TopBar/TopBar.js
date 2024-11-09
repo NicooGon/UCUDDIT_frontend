@@ -10,7 +10,7 @@ import PostButton from '../../Atoms/PostButton/PostButton';
 
 export default function TopBar() {
     const { isAuthenticated } = useAuth0();
-    
+
     return (
         <div className='container-fluid d-flex flex-wrap align-items-center justify-content-between border border-secondary p-2' id='topBarContainer'>
             <a href='/' className='d-flex align-items-center col-12 col-md-4 link-light link-underline-opacity-0 mb-2 mb-md-0'>
@@ -22,11 +22,11 @@ export default function TopBar() {
                 <div className='rounded-start-pill d-flex align-items-center' id='searchIconContainer' style={{ padding: '0 1vh' }}>
                     <FontAwesomeIcon id='searchIcon' className='fs-5' icon={faMagnifyingGlass} />
                 </div>
-                <input 
-                    id='searchBar' 
-                    placeholder='Search' 
-                    className='form-control rounded-end-pill border-0 fs-5' 
-                    style={{ width: '70%' }} 
+                <input
+                    id='searchBar'
+                    placeholder='Search'
+                    className='rounded-end-pill border-0 fs-5'
+                    style={{ width: '70%' }}
                 />
             </div>
 

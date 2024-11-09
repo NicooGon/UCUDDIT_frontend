@@ -9,8 +9,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Comment from '../../Components/Comment/Comment';
 
 export default function CommentsScreen() {
-    const { postId } = useParams();  
-    const [post, setPost] = useState(null);  
+    const { postId } = useParams();
+    const [post, setPost] = useState(null);
     const [comment, setComment] = useState('');
     const { user } = useAuth0();
     const [comments, setComments] = useState([]);
@@ -18,7 +18,7 @@ export default function CommentsScreen() {
     useEffect(() => {
         const fetchComments = async () => {
             const response = await axios.get(`http://localhost:8080/commentsByPost?postId=${postId}`);
-            setComments(response.data); 
+            setComments(response.data);
         };
         fetchComments();
     }, [postId]);
@@ -26,13 +26,13 @@ export default function CommentsScreen() {
     useEffect(() => {
         const fetchPostById = async () => {
             const response = await axios.get(`http://localhost:8080/postById?postId=${postId}`);
-            setPost(response.data); 
+            setPost(response.data);
         };
 
         if (postId) {
-            fetchPostById();  
+            fetchPostById();
         }
-    }, [postId]);  
+    }, [postId]);
 
     const saveComment = (e) => {
         setComment(e.target.value);
@@ -46,7 +46,7 @@ export default function CommentsScreen() {
         };
 
         await CreateComment(commentData);
-        setComment('');  
+        setComment('');
         const response = await axios.get(`http://localhost:8080/commentsByPost?postId=${postId}`);
         setComments(response.data);
     }
@@ -56,30 +56,30 @@ export default function CommentsScreen() {
             <LeftBar />
             <div className='col-12 col-md-10 d-flex flex-column align-items-center border border-secondary text-break' style={{ height: '94.87vh' }} id='container'>
                 {post ? (
-                    <Post 
-                        postId={post.postId} 
-                        title={post.title} 
-                        content={post.content} 
-                        createdAt={post.createdAt} 
-                        user={post.user} 
-                        likes={post.likes} 
+                    <Post
+                        postId={post.postId}
+                        title={post.title}
+                        content={post.content}
+                        createdAt={post.createdAt}
+                        user={post.user}
+                        likes={post.likes}
                     />
                 ) : (
                     <p>Loading post...</p>
                 )}
                 <div className='col-5 rounded-5 border border-secondary ' id='commentContainer'>
-                    <input 
-                        id='commentContent' 
-                        className='fs-4' 
-                        placeholder='Add a comment!' 
-                        value={comment}  
-                        onChange={saveComment}  
+                    <input
+                        id='commentContent'
+                        className='fs-4'
+                        placeholder='Add a comment!'
+                        value={comment}
+                        onChange={saveComment}
                     />
                     <div className='d-flex justify-content-end'>
-                        <button 
-                            id='sendCommentButton' 
-                            className='btn btn-primary rounded-5 fs-5 me-2' 
-                            onClick={handleComment}  
+                        <button
+                            id='sendCommentButton'
+                            className='btn btn-primary rounded-5 fs-5 me-2'
+                            onClick={handleComment}
                         >
                             Comment
                         </button>
@@ -91,9 +91,9 @@ export default function CommentsScreen() {
                         <Comment
                             key={commentId}
                             commentId={commentId}
-                            content={content} 
-                            creationDate={creationDate} 
-                            user={user} 
+                            content={content}
+                            creationDate={creationDate}
+                            user={user}
                         />
                     );
                 })}

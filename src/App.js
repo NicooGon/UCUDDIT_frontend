@@ -7,7 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import PostScreen from './Pages/SubmitPostScreen/SubmitPost';
 import CommentsScreen from './Pages/CommentsScreen/CommentsScreen';
-import getPosts from './Axios/getPosts';  
+import MyActivity from './Pages/UserActivityScreen/UserActivity';
 
 function App() {
 
@@ -19,6 +19,7 @@ function App() {
           <Route path="/" element={<MainScreen />} />
           <Route path="/settings" element={<SettingsScreen />} />
           <Route path="/post" element={<PostScreen />} />
+          <Route path="/activity/user/:name" element= {<MyActivity/>}/>
           <Route path='/post/:postId' element={<CommentsScreen />} />
         </Routes>
       </header>

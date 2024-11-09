@@ -17,6 +17,11 @@
 #searchBar{
     height: 30px;
     background-color:rgb(67, 67, 67);
+    color: white;
+}
+
+#searchBar:focus{
+    outline: none;
 }
 
 #searchBar::placeholder {

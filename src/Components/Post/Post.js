@@ -41,7 +41,7 @@ export default function Post({ title, content, user: postUser, createdAt, postId
                 <Link to={`/post/${postId}`} style={{ textDecoration: 'none', position: 'absolute', top: 10, left: 0, right: 0, bottom: 20, zIndex: 1 }} />
                 
                 <div className="d-flex align-items-center">
-                    <div
+                    <a
                         className='circle rounded-circle border border-white'
                         style={{
                             backgroundImage: `url(${postUser?.imageUrl})`,
@@ -51,9 +51,11 @@ export default function Post({ title, content, user: postUser, createdAt, postId
                             backgroundPosition: 'center',
                             backgroundRepeat: 'no-repeat',
                             flexShrink: 0,
+                            zIndex: 3
                         }}
+                        href={`/activity/user/${postUser?.name}`}
                     />
-                    <label className="fs-5 ms-3">{postUser?.name}</label>
+                    <label className="fs-5 ms-3" style={{zIndex: 3}}>{postUser?.name}</label>
                     <label className="fs-5 ms-3">{createdAt}</label>
                 </div>
 
@@ -89,7 +91,7 @@ export default function Post({ title, content, user: postUser, createdAt, postId
                         <button id="commentButton" className="btn btn-light rounded-circle ms-1 me-1">
                             <FontAwesomeIcon className='fs-4' icon={faComment} style={{ color: 'white' }} />
                         </button>
-                        <div className="fs-4 me-3 text-light">31</div>
+                        
                     </div>
             </div>
             </div>

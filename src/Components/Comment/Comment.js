@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpLong, faDownLong } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
 
-export default function Comment({ commentId, content, user: postUser, creationDate}) {
+export default function Comment({ post, content, user: postUser, creationDate }) {
     const { isAuthenticated, user } = useAuth0();
     const [likeButton, setLikeButton] = useState(true);
     const [dislikeButton, setDislikeButton] = useState(true);
@@ -32,10 +32,10 @@ export default function Comment({ commentId, content, user: postUser, creationDa
     };
 
     return (
-        <div className="col-12 col-md-5 border-3 rounded-4 mt-5">
+        <div className="col-12 col-md-5 border-3 rounded-4 mt-3">
             <div className='col-12' style={{ backgroundColor: 'rgb(57, 57, 57)', height: '0.1vh' }}></div>
             <div className="d-flex flex-column justify-content-between mt-3" id='containerPost'>
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center mb-2">
                     <div
                         className='circle rounded-circle border border-white'
                         style={{
@@ -68,11 +68,11 @@ export default function Comment({ commentId, content, user: postUser, creationDa
                             <FontAwesomeIcon className='fs-4' style={{ color: likeButton ? 'white' : 'lightBlue' }} icon={faUpLong} />
                         </button>
                         <div className="fs-4">1</div>
-                        <button 
+                        <button
                             className="btn btn-light rounded-circle ms-1"
                             id='dislikeButton'
                             onClick={dislikeButtonPulsed}
-                        >  
+                        >
                             <FontAwesomeIcon className='fs-4' style={{ color: dislikeButton ? 'white' : 'lightBlue' }} icon={faDownLong} />
                         </button>
                     </div>

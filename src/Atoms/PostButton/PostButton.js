@@ -13,7 +13,6 @@ export default function PostButton() {
     const togglePostTrue = () => {
         if(isAuthenticated)
         {
-            setPostState(true);
             navigate('/post');
         }
         else
@@ -21,10 +20,6 @@ export default function PostButton() {
             alert("You must register or log in to post.");
         }
         
-    }
-
-    const togglePostFalse = () => {
-        setPostState(false);
     }
 
     return (
@@ -37,9 +32,6 @@ export default function PostButton() {
                 <FontAwesomeIcon icon={faPlus} /> 
                 <div className="ms-2">Post</div> 
             </button>
-            {postState && (
-                <div></div> 
-            )}
         </div>
     );
 }
