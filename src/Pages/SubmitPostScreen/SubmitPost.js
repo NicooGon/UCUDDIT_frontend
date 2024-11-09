@@ -5,13 +5,15 @@ import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from "react";
 import CreatePost from '../../Axios/createPost';
 import { useAuth0 } from "@auth0/auth0-react";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function SubmitPost() {
     const [image, setImage] = useState();
     const [fileName, setFileName] = useState();
-    const [title, setTitle] = useState();
-    const [content, setContent] = useState();
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
     const { user } = useAuth0();
+    const navigate = useNavigate();
 
     const inputClick = () => {
         document.getElementById('fileInput').click();
@@ -24,13 +26,17 @@ export default function SubmitPost() {
 
     const saveTitle = (e) => {
         setTitle(e.target.value);
-    }
+    };
 
     const saveContent = (e) => {
         setContent(e.target.value);
-    }
+    };
 
     const handlePost = async () => {
+        if (title.trim() === '' || content.trim() === '') {
+            alert('Title and content are required!');
+            return;
+        }
 
         const postData = {
             user: { auth0id: user.sub },
@@ -38,7 +44,9 @@ export default function SubmitPost() {
             content: content,
         };
         const newPost = await CreatePost(postData);
-    }
+        alert('Post submitted successfully!');
+        navigate('/');
+    };
 
     return (
         <div className="container-fluid d-flex flex-column flex-md-row p-0">
@@ -58,8 +66,8 @@ export default function SubmitPost() {
                         }}
                         onInput={typeInput}
                         onChange={saveTitle}
-                    >
-                    </textarea>
+                        value={title}
+                    />
                     <div className="border border-secondary rounded p-3 mb-3" id="textImage">
                         <textarea
                             id="textPost"
@@ -72,7 +80,8 @@ export default function SubmitPost() {
                             }}
                             onInput={typeInput}
                             onChange={saveContent}
-                        ></textarea>
+                            value={content}
+                        />
                         {image && (
                             <img
                                 src={image}

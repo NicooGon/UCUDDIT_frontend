@@ -1,5 +1,4 @@
 import LeftBar from "../../Components/LeftBar/LeftBar";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Post from "../../Components/Post/Post";
@@ -8,38 +7,53 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./UserActivity.css";
 
-export default function UserActivity({user:postUser}) {
-    const { user } = useAuth0();
-    const { name } = useParams();
+export default function UserActivity() {
+    const { auth0id } = useParams();
     const [myPosts, setMyPosts] = useState([]);
     const [myComments, setMyComments] = useState([]);
     const [showPosts, setShowPosts] = useState(true);
     const [showLikes, setShowLikes] = useState(false);
     const [showComments, setShowComments] = useState(false);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         const fetchPostByUser = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/postsByUser`, { params: { name } });
+                const response = await axios.get(`http://localhost:8080/postsByUser`, { params: { auth0id } });
                 setMyPosts(response.data);
             } catch (error) {
                 console.error("Error fetching posts:", error);
             }
         };
         fetchPostByUser();
-    }, [name]);
+    }, [auth0id]);
 
     useEffect(() => {
         const fetchCommentsByUser = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/commentsByUser`, { params: { name } });
+                const response = await axios.get(`http://localhost:8080/commentsByUser`, { params: { auth0id } });
                 setMyComments(response.data);
             } catch (error) {
                 console.error("Error fetching comments:", error);
             }
         };
         fetchCommentsByUser();
-    }, [name]);
+    }, [auth0id]);
+
+    useEffect(() => {
+        const fetchUserByAuth0id = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/userByAuth0id`, { params: { auth0id } });
+                setUser(response.data);
+            } catch (error) {
+                console.error("Error fetching user:", error);
+            }
+        };
+
+        if (auth0id) {
+            fetchUserByAuth0id();
+        }
+    }, [auth0id]);
 
     const handleShowPosts = () => {
         setShowPosts(true);
@@ -67,7 +81,7 @@ export default function UserActivity({user:postUser}) {
                     <div
                         className="img-fluid rounded-circle border border-white me-5"
                         style={{
-                            backgroundImage: `url(${user?.picture})`,
+                            backgroundImage: `url(${user?.imageUrl})`,
                             height: "100px",
                             width: "100px",
                             backgroundSize: "cover",
@@ -142,7 +156,6 @@ export default function UserActivity({user:postUser}) {
                         )}
                     </div>
                 )}
-
             </div>
         </div>
     );

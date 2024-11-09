@@ -12,7 +12,7 @@ export default function CommentsScreen() {
     const { postId } = useParams();
     const [post, setPost] = useState(null);
     const [comment, setComment] = useState('');
-    const { user } = useAuth0();
+    const { user, isAuthenticated } = useAuth0();
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
@@ -39,16 +39,23 @@ export default function CommentsScreen() {
     }
 
     const handleComment = async () => {
-        const commentData = {
-            user: { auth0id: user.sub },
-            post: { postId: postId },
-            content: comment,
-        };
-
-        await CreateComment(commentData);
-        setComment('');
-        const response = await axios.get(`http://localhost:8080/commentsByPost?postId=${postId}`);
-        setComments(response.data);
+        if(isAuthenticated)
+        {
+            const commentData = {
+                user: { auth0id: user.sub },
+                post: { postId: postId },
+                content: comment,
+            };
+    
+            await CreateComment(commentData);
+            setComment('');
+            const response = await axios.get(`http://localhost:8080/commentsByPost?postId=${postId}`);
+            setComments(response.data);
+        }
+        else
+        {
+            alert('You must be logged in to comment');
+        }
     }
 
     return (

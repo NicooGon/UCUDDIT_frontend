@@ -19,7 +19,7 @@ function App() {
           <Route path="/" element={<MainScreen />} />
           <Route path="/settings" element={<SettingsScreen />} />
           <Route path="/post" element={<PostScreen />} />
-          <Route path="/activity/user/:name" element= {<MyActivity/>}/>
+          <Route path="/activity/user/:auth0id" element= {<MyActivity/>}/>
           <Route path='/post/:postId' element={<CommentsScreen />} />
         </Routes>
       </header>

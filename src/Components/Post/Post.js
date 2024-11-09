@@ -53,7 +53,7 @@ export default function Post({ title, content, user: postUser, createdAt, postId
                             flexShrink: 0,
                             zIndex: 3
                         }}
-                        href={`/activity/user/${postUser?.name}`}
+                        href={`/activity/user/${postUser?.auth0id}`}
                     />
                     <label className="fs-5 ms-3" style={{zIndex: 3}}>{postUser?.name}</label>
                     <label className="fs-5 ms-3">{createdAt}</label>

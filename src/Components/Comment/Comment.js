@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpLong, faDownLong } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
 
-export default function Comment({ post, content, user: postUser, creationDate }) {
+export default function Comment({ content, user: postUser, creationDate }) {
     const { isAuthenticated, user } = useAuth0();
     const [likeButton, setLikeButton] = useState(true);
     const [dislikeButton, setDislikeButton] = useState(true);

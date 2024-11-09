@@ -30,7 +30,7 @@ export const Profile = () => {
                     />
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="profileButton">
                         <li>
-                            <a className="dropdown-item d-flex align-items-center" href={`/activity/user/${user.name}`}>
+                            <a className="dropdown-item d-flex align-items-center" href={`/activity/user/${user.sub}`}>
                                 <FontAwesomeIcon icon={faUser} />
                                 <span className="ms-2">My Activity</span>
                             </a>
