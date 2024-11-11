@@ -77,8 +77,6 @@ export default function Post({ title, content, user: postUser, createdAt, postId
         }
     };
     
-
-
     return (
         <div className="col-12 col-md-5 border-3 rounded-4 mt-5" style={{ position: 'relative' }}>
             <div className='col-12' style={{ backgroundColor: 'rgb(57, 57, 57)', height: '0.1vh' }}></div>

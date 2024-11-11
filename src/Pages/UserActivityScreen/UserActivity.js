@@ -11,47 +11,31 @@ export default function UserActivity() {
     const { auth0id } = useParams();
     const [myPosts, setMyPosts] = useState([]);
     const [myComments, setMyComments] = useState([]);
+    const [myLikes, setMyLikes] = useState([]); 
     const [showPosts, setShowPosts] = useState(true);
     const [showLikes, setShowLikes] = useState(false);
     const [showComments, setShowComments] = useState(false);
     const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        const fetchPostByUser = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8080/postsByUser`, { params: { auth0id } });
-                setMyPosts(response.data);
-            } catch (error) {
-                console.error("Error fetching posts:", error);
-            }
-        };
-        fetchPostByUser();
-    }, [auth0id]);
+    const fetchData = async () => {
+        try {
+            const postsResponse = await axios.get(`http://localhost:8080/postsByUser`, { params: { auth0id } });
+            setMyPosts(postsResponse.data);
+            const commentsResponse = await axios.get(`http://localhost:8080/commentsByUser`, { params: { auth0id } });
+            setMyComments(commentsResponse.data);
+            const userResponse = await axios.get(`http://localhost:8080/userByAuth0id`, { params: { auth0id } });
+            setUser(userResponse.data);
+            const likesResponse = await axios.get(`http://localhost:8080/likedByUser`, { params: { auth0id, likes:1 } });
+            setMyLikes(likesResponse.data);
+            console.log("Liked posts response:", likesResponse.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
 
     useEffect(() => {
-        const fetchCommentsByUser = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8080/commentsByUser`, { params: { auth0id } });
-                setMyComments(response.data);
-            } catch (error) {
-                console.error("Error fetching comments:", error);
-            }
-        };
-        fetchCommentsByUser();
-    }, [auth0id]);
-
-    useEffect(() => {
-        const fetchUserByAuth0id = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8080/userByAuth0id`, { params: { auth0id } });
-                setUser(response.data);
-            } catch (error) {
-                console.error("Error fetching user:", error);
-            }
-        };
-
         if (auth0id) {
-            fetchUserByAuth0id();
+            fetchData();
         }
     }, [auth0id]);
 
@@ -81,7 +65,7 @@ export default function UserActivity() {
                     <div
                         className="img-fluid rounded-circle border border-white me-5"
                         style={{
-                            backgroundImage: `url(${user?.imageUrl})`,
+                            backgroundImage: `url(${user?.imageUrl || 'default-profile-image.jpg'})`,
                             height: "100px",
                             width: "100px",
                             backgroundSize: "cover",
@@ -94,13 +78,22 @@ export default function UserActivity() {
                 </div>
 
                 <div className="d-flex col-2 justify-content-center align-items-center mb-4">
-                    <button className="col-12 fs-3 rounded-pill d-flex align-items-center justify-content-center ms-4" onClick={handleShowPosts}>
+                    <button 
+                        className={`col-12 fs-3 rounded-pill d-flex align-items-center justify-content-center ms-4 ${showPosts ? 'active' : ''}`} 
+                        onClick={handleShowPosts}
+                    >
                         Posts
                     </button>
-                    <button className="col-12 fs-3 rounded-pill d-flex align-items-center justify-content-center ms-4" onClick={handleShowLikes}>
+                    <button 
+                        className={`col-12 fs-3 rounded-pill d-flex align-items-center justify-content-center ms-4 ${showLikes ? 'active' : ''}`} 
+                        onClick={handleShowLikes}
+                    >
                         Likes
                     </button>
-                    <button className="col-12 fs-3 rounded-pill d-flex align-items-center justify-content-center ms-4" onClick={handleShowComments}>
+                    <button 
+                        className={`col-12 fs-3 rounded-pill d-flex align-items-center justify-content-center ms-4 ${showComments ? 'active' : ''}`} 
+                        onClick={handleShowComments}
+                    >
                         Comments
                     </button>
                 </div>
@@ -110,20 +103,17 @@ export default function UserActivity() {
                         {myPosts.length === 0 ? (
                             <p>No posts found.</p>
                         ) : (
-                            myPosts.map((post) => {
-                                const { postId, user, title, content, createdAt, likes = 0 } = post;
-                                return (
-                                    <Post
-                                        key={postId}
-                                        postId={postId}
-                                        title={title}
-                                        content={content}
-                                        createdAt={createdAt}
-                                        user={user}
-                                        likes={likes}
-                                    />
-                                );
-                            })
+                            myPosts.map((post) => (
+                                <Post
+                                    key={post.postId}
+                                    postId={post.postId}
+                                    title={post.title}
+                                    content={post.content}
+                                    createdAt={post.createdAt}
+                                    user={post.user}
+                                    likes={post.likes || 0}
+                                />
+                            ))
                         )}
                     </div>
                 )}
@@ -133,27 +123,44 @@ export default function UserActivity() {
                         {myComments.length === 0 ? (
                             <p>No comments found.</p>
                         ) : (
-                            myComments.map((comment) => {
-                                const { commentId, user, content, creationDate, post } = comment;
-                                return (
-                                    <Link
-                                        to={`/post/${post.postId}`}
-                                        key={commentId}
-                                        className="col-12 col-md-10 d-flex flex-column align-items-center mb-3"
-                                        style={{
-                                            textDecoration: 'none', color: 'white'
-                                        }}
-                                    >
-                                        <Comment
-                                            commentId={commentId}
-                                            content={content}
-                                            creationDate={creationDate}
-                                            user={user}
-                                            post={post}
-                                        />
-                                    </Link>
-                                );
-                            })
+                            myComments.map((comment) => (
+                                <Link
+                                    to={`/post/${comment.post.postId}`}
+                                    key={comment.commentId}
+                                    className="col-12 col-md-10 d-flex flex-column align-items-center mb-3"
+                                    style={{
+                                        textDecoration: 'none', color: 'white'
+                                    }}
+                                >
+                                    <Comment
+                                        commentId={comment.commentId}
+                                        content={comment.content}
+                                        creationDate={comment.creationDate}
+                                        user={comment.user}
+                                        post={comment.post}
+                                    />
+                                </Link>
+                            ))
+                        )}
+                    </div>
+                )}
+
+                {showLikes && (
+                    <div className="col-12 col-md-10 d-flex flex-column align-items-center">
+                        {myLikes.length === 0 ? (
+                            <p>No liked posts found.</p>
+                        ) : (
+                            myLikes.map((post) => (
+                                <Post
+                                    key={post.postId}
+                                    postId={post.postId}
+                                    title={post.title}
+                                    content={post.content}
+                                    createdAt={post.createdAt}
+                                    user={post.user}
+                                    likes={post.likes || 0}
+                                />
+                            ))
                         )}
                     </div>
                 )}
