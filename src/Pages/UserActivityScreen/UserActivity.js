@@ -87,6 +87,7 @@ export default function UserActivity() {
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                             backgroundRepeat: "no-repeat",
+                            flexShrink: 0
                         }}
                     />
                     <label>{user?.name}</label>

@@ -3,9 +3,9 @@ import './SubmitPost.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from "react";
-import CreatePost from '../../Axios/createPost';
+import { createPost } from '../../Axios/axiosPost';
 import { useAuth0 } from "@auth0/auth0-react";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function SubmitPost() {
     const [image, setImage] = useState();
@@ -43,7 +43,7 @@ export default function SubmitPost() {
             title: title,
             content: content,
         };
-        const newPost = await CreatePost(postData);
+        const newPost = await createPost(postData);
         alert('Post submitted successfully!');
         navigate('/');
     };

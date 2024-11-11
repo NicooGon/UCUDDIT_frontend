@@ -7,7 +7,8 @@ import { Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import PostScreen from './Pages/SubmitPostScreen/SubmitPost';
 import CommentsScreen from './Pages/CommentsScreen/CommentsScreen';
-import MyActivity from './Pages/UserActivityScreen/UserActivity';
+import UserActivity from './Pages/UserActivityScreen/UserActivity';
+import PostsBySearch from './Pages/PostBySearch/PostBySearch';
 
 function App() {
 
@@ -19,8 +20,9 @@ function App() {
           <Route path="/" element={<MainScreen />} />
           <Route path="/settings" element={<SettingsScreen />} />
           <Route path="/post" element={<PostScreen />} />
-          <Route path="/activity/user/:auth0id" element= {<MyActivity/>}/>
+          <Route path="/activity/user/:auth0id" element= {<UserActivity/>}/>
           <Route path='/post/:postId' element={<CommentsScreen />} />
+          <Route path='/posts/:search' element={<PostsBySearch />} />
         </Routes>
       </header>
     </div>

@@ -7,14 +7,8 @@
     color: white;
   }
 
-#commentContainer{
-    background-color: transparent;
-    height: 8vh; 
-}
-
 #sendCommentButton{
   background-color: rgb(58, 57, 57); 
   color: white;
   border: none;
-  width: 120px;
 }

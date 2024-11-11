@@ -16,47 +16,54 @@ export default function CommentsScreen() {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
-        const fetchComments = async () => {
-            const response = await axios.get(`http://localhost:8080/commentsByPost?postId=${postId}`);
-            setComments(response.data);
-        };
-        fetchComments();
-    }, [postId]);
+        const fetchPostAndComments = async () => {
+            try {
+                const postResponse = await axios.get('http://localhost:8080/postById', { params: { postId } });
+                setPost(postResponse.data);
 
-    useEffect(() => {
-        const fetchPostById = async () => {
-            const response = await axios.get(`http://localhost:8080/postById?postId=${postId}`);
-            setPost(response.data);
+                const commentsResponse = await axios.get('http://localhost:8080/commentsByPost', { params: { postId } });
+                setComments(commentsResponse.data);
+            } catch (error) {
+                console.error('Error fetching post or comments:', error);
+            }
         };
 
         if (postId) {
-            fetchPostById();
+            fetchPostAndComments();
         }
     }, [postId]);
 
-    const saveComment = (e) => {
-        setComment(e.target.value);
-    }
-
     const handleComment = async () => {
-        if(isAuthenticated)
-        {
+        if (isAuthenticated) {
+            if (comment.trim() === '') {
+                alert('Content is required!');
+                return;
+            }
+            
             const commentData = {
                 user: { auth0id: user.sub },
-                post: { postId: postId },
+                post: { postId },
                 content: comment,
             };
-    
-            await CreateComment(commentData);
-            setComment('');
-            const response = await axios.get(`http://localhost:8080/commentsByPost?postId=${postId}`);
-            setComments(response.data);
-        }
-        else
-        {
+
+            try {
+                await CreateComment(commentData);
+                setComment('');
+                const response = await axios.get('http://localhost:8080/commentsByPost', { params: { postId } });
+                setComments(response.data);
+            } 
+            catch (error) {
+                console.error('Error posting comment:', error);
+            }
+        } 
+        else {
             alert('You must be logged in to comment');
         }
-    }
+    };
+
+    const saveComment = (e) => {
+        setComment(e.target.value);
+    };
 
     return (
         <div className='d-flex flex-column flex-md-row'>
@@ -74,10 +81,10 @@ export default function CommentsScreen() {
                 ) : (
                     <p>Loading post...</p>
                 )}
-                <div className='col-5 rounded-5 border border-secondary ' id='commentContainer'>
+                <div className='col-12 col-md-5 rounded-5 border border-secondary ' id='commentContainer'>
                     <input
                         id='commentContent'
-                        className='fs-4'
+                        className='fs-4 w-100'
                         placeholder='Add a comment!'
                         value={comment}
                         onChange={saveComment}
@@ -85,25 +92,29 @@ export default function CommentsScreen() {
                     <div className='d-flex justify-content-end'>
                         <button
                             id='sendCommentButton'
-                            className='btn btn-primary rounded-5 fs-5 me-2'
+                            className='btn btn-primary rounded-5 fs-5 w-auto me-2 mb-2'
                             onClick={handleComment}
                         >
                             Comment
                         </button>
                     </div>
                 </div>
-                {comments.map(comment => {
-                    const { commentId, user, content, creationDate } = comment;
-                    return (
-                        <Comment
-                            key={commentId}
-                            commentId={commentId}
-                            content={content}
-                            creationDate={creationDate}
-                            user={user}
-                        />
-                    );
-                })}
+                {comments.length > 0 ? (
+                    comments.map((comment) => {
+                        const { commentId, user, content, creationDate } = comment;
+                        return (
+                            <Comment
+                                key={commentId}
+                                commentId={commentId}
+                                content={content}
+                                creationDate={creationDate}
+                                user={user}
+                            />
+                        );
+                    })
+                ) : (
+                    <p>No comments yet.</p>
+                )}
             </div>
         </div>
     );

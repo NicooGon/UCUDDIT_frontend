@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import LeftBar from '../../Components/LeftBar/LeftBar';
 import './MainScreen.css';
 import Post from '../../Components/Post/Post';
-import CreateUser from '../../Axios/createUser';
+import { CreateUser } from '../../Axios/axiosUser';
 import { useAuth0 } from '@auth0/auth0-react';
-import getPosts from '../../Axios/getPosts';
+import { getPosts } from '../../Axios/axiosPost';
 
 export default function MainScreen() {
     const { user } = useAuth0();
@@ -12,8 +12,13 @@ export default function MainScreen() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const data = await getPosts();
-            setPosts(data);
+            try {
+                const data = await getPosts();
+                setPosts(data);
+            } 
+            catch (error) {
+                console.error("Error fetching posts:", error);
+            }
         };
 
         fetchPosts();
@@ -28,12 +33,17 @@ export default function MainScreen() {
                     email: user.email,
                     imageUrl: user.picture,
                 };
-                await CreateUser(userData);
+
+                try {
+                    await CreateUser(userData);
+                } catch (error) {
+                    console.error("Error creating user:", error);
+                }
             }
         };
+
         handleLogin();
     }, [user]);
-
 
     return (
         <div className='d-flex flex-column flex-md-row'>

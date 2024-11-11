@@ -7,10 +7,28 @@ import { LoginButton } from '../../Atoms/Login/Login';
 import { Profile } from '../../Atoms/Profile/Profile';
 import { useAuth0 } from '@auth0/auth0-react';
 import PostButton from '../../Atoms/PostButton/PostButton';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function TopBar() {
     const { isAuthenticated } = useAuth0();
+    const [search, setSearch] = useState("");
+    const navigate = useNavigate();
 
+    const saveSearch = (e) => {
+        setSearch(e.target.value);
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            if (search.trim() !== '') {
+                navigate(`/posts/${search}`);
+            } else {
+                navigate(`/`);  
+            }
+        }
+    };
+    
     return (
         <div className='container-fluid d-flex flex-wrap align-items-center justify-content-between border border-secondary p-2' id='topBarContainer'>
             <a href='/' className='d-flex align-items-center col-12 col-md-4 link-light link-underline-opacity-0 mb-2 mb-md-0'>
@@ -26,6 +44,9 @@ export default function TopBar() {
                     id='searchBar'
                     placeholder='Search'
                     className='rounded-end-pill border-0 fs-5'
+                    value={search}
+                    onChange={saveSearch}
+                    onKeyDown={handleKeyPress}
                     style={{ width: '70%' }}
                 />
             </div>
