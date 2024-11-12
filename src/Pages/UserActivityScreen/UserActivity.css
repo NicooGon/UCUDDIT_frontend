@@ -3,3 +3,27 @@ button{
     background-color: black;
     border: none;
 }
+
+#showPosts{
+    background-color: transparent;
+}
+
+#showPosts:hover{
+    background-color: rgb(56, 55, 55);
+}
+
+#showLikes{
+    background-color: transparent;
+}
+
+#showLikes:hover{
+    background-color: rgb(56, 55, 55);
+}
+
+#showComments{
+    background-color: transparent;
+}
+
+#showComments:hover{
+    background-color: rgb(56, 55, 55);
+}

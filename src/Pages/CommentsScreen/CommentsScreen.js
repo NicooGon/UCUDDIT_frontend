@@ -65,6 +65,11 @@ export default function CommentsScreen() {
         setComment(e.target.value);
     };
 
+    const typeInput = (e) => {
+        e.target.style.height = 'auto';
+        e.target.style.height = `${e.target.scrollHeight}px`;
+    };
+
     return (
         <div className='d-flex flex-column flex-md-row'>
             <LeftBar />
@@ -82,12 +87,14 @@ export default function CommentsScreen() {
                     <p>Loading post...</p>
                 )}
                 <div className='col-12 col-md-5 rounded-5 border border-secondary ' id='commentContainer'>
-                    <input
+                    <textarea
                         id='commentContent'
                         className='fs-4 w-100'
                         placeholder='Add a comment!'
+                        maxLength={600}
                         value={comment}
                         onChange={saveComment}
+                        onInput={typeInput}
                     />
                     <div className='d-flex justify-content-end'>
                         <button

@@ -5,10 +5,12 @@
     border-color: transparent;
     width: 100%;
     color: white;
+    height:4vh ;
   }
 
 #sendCommentButton{
   background-color: rgb(58, 57, 57); 
   color: white;
   border: none;
+  
 }

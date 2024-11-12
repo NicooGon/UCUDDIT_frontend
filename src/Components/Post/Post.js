@@ -131,7 +131,7 @@ export default function Post({ title, content, user: postUser, createdAt, postId
                         </button>
                     </div>
 
-                    <div className="d-flex ms-md-4 rounded-5" id="containerComment">
+                    <div className="d-flex ms-md-4 rounded-5" id="containerPostComment">
                         <button id="commentButton" className="btn btn-light rounded-circle ms-1 me-1">
                             <FontAwesomeIcon className='fs-4' icon={faComment} style={{ color: 'white' }} />
                         </button>
