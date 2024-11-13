@@ -9,6 +9,7 @@ import PostScreen from './Pages/SubmitPostScreen/SubmitPost';
 import CommentsScreen from './Pages/CommentsScreen/CommentsScreen';
 import UserActivity from './Pages/UserActivityScreen/UserActivity';
 import PostsBySearch from './Pages/PostBySearch/PostBySearch';
+import LeftBar from './Components/LeftBar/LeftBar';
 
 function App() {
 
@@ -16,14 +17,17 @@ function App() {
     <div className="App">
       <header className="App-header">
         <TopBar />
-        <Routes>
-          <Route path="/" element={<MainScreen />} />
-          <Route path="/settings" element={<SettingsScreen />} />
-          <Route path="/post" element={<PostScreen />} />
-          <Route path="/activity/user/:auth0id" element= {<UserActivity/>}/>
-          <Route path='/post/:postId' element={<CommentsScreen />} />
-          <Route path='/posts/:search' element={<PostsBySearch />} />
-        </Routes>
+        <div className="d-flex flex-column flex-md-row">
+            <LeftBar />
+            <Routes>
+              <Route path="/" element={<MainScreen />} />
+              <Route path="/settings" element={<SettingsScreen />} />
+              <Route path="/post" element={<PostScreen />} />
+              <Route path="/activity/user/:auth0id" element= {<UserActivity/>}/>
+              <Route path='/post/:postId' element={<CommentsScreen />} />
+              <Route path='/posts/:search' element={<PostsBySearch />} />
+            </Routes>
+        </div>
       </header>
     </div>
   );

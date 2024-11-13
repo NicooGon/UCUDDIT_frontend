@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import LeftBar from '../../Components/LeftBar/LeftBar';
 import './MainScreen.css';
 import Post from '../../Components/Post/Post';
 import { CreateUser } from '../../Axios/axiosUser';
@@ -15,7 +14,7 @@ export default function MainScreen() {
             try {
                 const data = await getPosts();
                 setPosts(data);
-            } 
+            }
             catch (error) {
                 console.error("Error fetching posts:", error);
             }
@@ -36,7 +35,8 @@ export default function MainScreen() {
 
                 try {
                     await CreateUser(userData);
-                } catch (error) {
+                } 
+                catch (error) {
                     console.error("Error creating user:", error);
                 }
             }
@@ -46,25 +46,24 @@ export default function MainScreen() {
     }, [user]);
 
     return (
-        <div className='d-flex flex-column flex-md-row'>
-            <LeftBar />
-            <div className='col-12 col-md-10 d-flex flex-column align-items-center border border-secondary text-break' style={{ height: '94.87vh' }} id='container'>
-                {posts.map(post => {
-                    const { postId, user, title, content, createdAt, likes = 0 } = post;
 
-                    return (
-                        <Post
-                            key={postId}
-                            postId={postId}
-                            title={title}
-                            content={content}
-                            createdAt={createdAt}
-                            user={user}
-                            likes={likes}
-                        />
-                    );
-                })}
-            </div>
+        <div className='col-12 col-md-10 d-flex flex-column align-items-center border border-secondary text-break' style={{ height: '94.87vh' }} id='container'>
+            {posts.map(post => {
+                const { postId, user, title, content, createdAt, likes = 0 } = post;
+
+                return (
+                    <Post
+                        key={postId}
+                        postId={postId}
+                        title={title}
+                        content={content}
+                        createdAt={createdAt}
+                        user={user}
+                        likes={likes}
+                    />
+                );
+            })}
         </div>
+
     );
 }
