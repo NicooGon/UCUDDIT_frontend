@@ -1,5 +1,8 @@
 #container{
     background-color: black;
-    overflow-y: scroll;
+    overflow-y: auto;
+    margin-left: auto;
+    margin-top: 63px;
+    min-height: 95.1vh;
 }
 

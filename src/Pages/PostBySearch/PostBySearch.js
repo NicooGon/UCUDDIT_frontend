@@ -24,7 +24,7 @@ export default function PostsBySearch() {
 
     return (
 
-        <div className="col-12 col-md-10 d-flex flex-column align-items-center border border-secondary text-break" style={{ height: "94.87vh" }} id="container">
+        <div className="col-12 col-md-10 d-flex flex-column align-items-center border border-secondary text-break" id="container">
             {posts.map(post => {
                 const { postId, user, title, content, createdAt, likes = 0 } = post;
 

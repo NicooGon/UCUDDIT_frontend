@@ -4,7 +4,7 @@ export default function SettingsScreen() {
     const { user } = useAuth0();
     return (
 
-        <div className='col-12 col-md-10 d-flex flex-column justify-content-evenly align-items-center border border-secondary text-break' style={{ minHeight: '94.87vh' }} id='container'>
+        <div className='col-12 col-md-10 d-flex flex-column justify-content-evenly align-items-center border border-secondary text-break' style={{ minHeight: '95.1vh' }} id='container'>
             <div
                 className='img-fluid rounded-circle border border-white'
                 style={{

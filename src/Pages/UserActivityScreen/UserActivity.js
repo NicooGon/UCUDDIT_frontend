@@ -58,7 +58,7 @@ export default function UserActivity() {
 
     return (
 
-        <div className="col-12 col-md-10 d-flex flex-column align-items-center border border-secondary text-break" style={{ height: "94.87vh" }} id="container">
+        <div className="col-12 col-md-10 d-flex flex-column align-items-center border border-secondary text-break" id="container">
             <div className="d-flex justify-content-center align-items-center mt-5 mb-5">
                 <div
                     className="img-fluid rounded-circle border border-white me-5"

@@ -52,7 +52,7 @@ export default function SubmitPost() {
     };
 
     return (
-        <div className='col-12 col-md-10 d-flex flex-column justify-content-center align-items-center border border-secondary text-break' style={{ minHeight: '94.87vh', padding: '0', margin: '0' }} id='container'>
+        <div className='col-12 col-md-10 d-flex flex-column justify-content-center align-items-center border border-secondary text-break' id='container'>
             <label className="fw-bold fs-3 mb-3 text-center">Create a Post</label>
             <div className="col-12 col-md-8 col-lg-6 custom-SubmitPost-container d-flex flex-column">
                 <textarea
