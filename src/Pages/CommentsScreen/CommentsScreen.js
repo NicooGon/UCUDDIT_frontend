@@ -22,7 +22,8 @@ export default function CommentsScreen() {
 
                 const commentsResponse = await axios.get('http://localhost:8080/commentsByPost', { params: { postId } });
                 setComments(commentsResponse.data);
-            } catch (error) {
+            }
+            catch (error) {
                 console.error('Error fetching post or comments:', error);
             }
         };

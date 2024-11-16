@@ -12,8 +12,8 @@ export default function PostsBySearch() {
             try {
                 const postsData = await getPostsByTitle(search);
                 setPosts(postsData);
-            } catch
-            (error) {
+            }
+            catch (error) {
                 console.error("Error fetching posts:", error);
             }
         };

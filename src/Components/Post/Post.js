@@ -27,7 +27,8 @@ export default function Post({ title, content, user: postUser, createdAt, postId
             const userLike = response.data;
             setLikeButton(userLike === 1);
             setDislikeButton(userLike === -1);
-        } catch (error) {
+        } 
+        catch (error) {
             console.error("Error fetching user like:", error);
         }
     };
@@ -38,11 +39,11 @@ export default function Post({ title, content, user: postUser, createdAt, postId
             setLikesCount(response.data);  
             const responseDislikes = await axios.get(`http://localhost:8080/post/${postId}/dislikes`);
             setDisLikesCount(responseDislikes.data);  
-        } catch (error) {
+        } 
+        catch (error) {
             console.error("Error fetching likes count:", error);
         }
     };
-
 
     const toggleLikeDislike = async (rateValue) => {
         const newRateValue = (likeButton && rateValue === 1) || (dislikeButton && rateValue === -1) ? 0 : rateValue;
@@ -60,19 +61,23 @@ export default function Post({ title, content, user: postUser, createdAt, postId
                 if (newRateValue === 1) {
                     setLikeButton(true);  
                     setDislikeButton(false);  
-                } else if (newRateValue === -1) {
+                } 
+                else if (newRateValue === -1) {
                     setLikeButton(false);  
                     setDislikeButton(true);  
-                } else {
+                } 
+                else {
                     setLikeButton(false);  
                     setDislikeButton(false);
                 }
     
                 getLikesCount();
-            } catch (error) {
+            } 
+            catch (error) {
                 console.error("Error toggling like/dislike:", error);
             }
-        } else {
+        } 
+        else {
             alert("You must register or log in to rate.");
         }
     };

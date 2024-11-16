@@ -18,16 +18,19 @@ export default function UserActivity() {
 
     const fetchData = async () => {
         try {
-            const postsResponse = await axios.get(`http://localhost:8080/postsByUser`, { params: { auth0id } });
-            setMyPosts(postsResponse.data);
-            const commentsResponse = await axios.get(`http://localhost:8080/commentsByUser`, { params: { auth0id } });
-            setMyComments(commentsResponse.data);
             const userResponse = await axios.get(`http://localhost:8080/userByAuth0id`, { params: { auth0id } });
             setUser(userResponse.data);
+
+            const postsResponse = await axios.get(`http://localhost:8080/postsByUser`, { params: { auth0id } });
+            setMyPosts(postsResponse.data);
+
+            const commentsResponse = await axios.get(`http://localhost:8080/commentsByUser`, { params: { auth0id } });
+            setMyComments(commentsResponse.data);
+
             const likesResponse = await axios.get(`http://localhost:8080/likedByUser`, { params: { auth0id, likes: 1 } });
             setMyLikes(likesResponse.data);
-            console.log("Liked posts response:", likesResponse.data);
-        } catch (error) {
+        }
+        catch (error) {
             console.error("Error fetching data:", error);
         }
     };
@@ -35,6 +38,7 @@ export default function UserActivity() {
     useEffect(() => {
         if (auth0id) {
             fetchData();
+            console.log("auth0id:", auth0id);
         }
     }, [auth0id]);
 
@@ -63,7 +67,7 @@ export default function UserActivity() {
                 <div
                     className="img-fluid rounded-circle border border-white me-5"
                     style={{
-                        backgroundImage: `url(${user?.imageUrl || 'default-profile-image.jpg'})`,
+                        backgroundImage: `url(${user?.imageUrl})`,
                         height: "100px",
                         width: "100px",
                         backgroundSize: "cover",

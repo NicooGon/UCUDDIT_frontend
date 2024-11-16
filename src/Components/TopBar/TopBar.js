@@ -23,12 +23,13 @@ export default function TopBar() {
         if (e.key === 'Enter') {
             if (search.trim() !== '') {
                 navigate(`/posts/${search}`);
-            } else {
-                navigate(`/`);  
+            } 
+            else {
+                navigate(`/`);
             }
         }
     };
-    
+
     return (
         <div className='container-fluid d-flex flex-wrap align-items-center justify-content-between border border-secondary p-2' id='topBarContainer'>
             <a href='/' className='d-flex align-items-center col-12 col-md-4 link-light link-underline-opacity-0 mb-2 mb-md-0'>

@@ -35,7 +35,7 @@ export default function MainScreen() {
 
                 try {
                     await CreateUser(userData);
-                } 
+                }
                 catch (error) {
                     console.error("Error creating user:", error);
                 }

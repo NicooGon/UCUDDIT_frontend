@@ -18,15 +18,15 @@ function App() {
       <header className="App-header">
         <TopBar />
         <div className="d-flex flex-column flex-md-row">
-            <LeftBar />
-            <Routes>
-              <Route path="/" element={<MainScreen />} />
-              <Route path="/settings" element={<SettingsScreen />} />
-              <Route path="/post" element={<PostScreen />} />
-              <Route path="/activity/user/:auth0id" element= {<UserActivity/>}/>
-              <Route path='/post/:postId' element={<CommentsScreen />} />
-              <Route path='/posts/:search' element={<PostsBySearch />} />
-            </Routes>
+          <LeftBar />
+          <Routes>
+            <Route path="/" element={<MainScreen />} />
+            <Route path="/settings" element={<SettingsScreen />} />
+            <Route path="/post" element={<PostScreen />} />
+            <Route path="/activity/user/:auth0id" element={<UserActivity />} />
+            <Route path='/post/:postId' element={<CommentsScreen />} />
+            <Route path='/posts/:search' element={<PostsBySearch />} />
+          </Routes>
         </div>
       </header>
     </div>
