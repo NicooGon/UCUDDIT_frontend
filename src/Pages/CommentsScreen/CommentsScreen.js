@@ -72,7 +72,7 @@ export default function CommentsScreen() {
 
     return (
 
-        <div className='col-12 col-md-10 d-flex flex-column align-items-center border border-secondary text-break mt-5' id='container'>
+        <div className='col-12 col-md-10 d-flex flex-column align-items-center border border-secondary text-break' id='container'>
             {post ? (
                 <Post
                     postId={post.postId}

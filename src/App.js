@@ -17,8 +17,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <div className='mb-5'>
         <TopBar />
-        <div className="d-flex flex-column flex-md-row " style={{backgroundColor:"black"}}>
+        </div>
+        <div className="d-flex flex-column flex-md-row mt-3 " style={{backgroundColor:"black"}}>
           <LeftBar />
           <Routes>
             <Route path="/" element={<MainScreen />} />
