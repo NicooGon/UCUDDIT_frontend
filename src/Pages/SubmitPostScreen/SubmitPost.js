@@ -13,6 +13,7 @@ export default function SubmitPost() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [community, setCommunity] = useState('');
+    const [postSend, setPostSend] = useState(true);
     const { user } = useAuth0();
     const [showToast, setShowToast] = useState(false);
     const navigate = useNavigate();
@@ -46,6 +47,9 @@ export default function SubmitPost() {
     }
 
     const handlePost = async () => {
+        if(!postSend){
+            return alert('You can only send the post once')
+        }
         if (title.trim() === '') {
             alert('Title is required!');
             return;
@@ -68,6 +72,7 @@ export default function SubmitPost() {
 
         await createPost(postData);
 
+        setPostSend(false);
         setShowToast(true);
         setTimeout(() => navigate('/'), 3000);
     };

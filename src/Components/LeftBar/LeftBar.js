@@ -17,7 +17,7 @@ export default function LeftBar() {
 
     return (
         <div className="col-12 col-md-2 d-flex flex-column text-break border-top-0" id="leftBarContainer">
-            <div className="d-flex flex-column justify-content-between" style={{ height: '100%', width: '100%' }}>
+            <div className="d-flex flex-column " style={{ height: '100%', width: '100%' }}>
 
                 <a href="/" className="d-flex justify-content-center align-items-center link-light link-underline-opacity-0 mt-5 p-3" data-aos="fade-up">
                     <div id="homeButton" className="d-flex align-items-center justify-content-center rounded p-2 w-75">
