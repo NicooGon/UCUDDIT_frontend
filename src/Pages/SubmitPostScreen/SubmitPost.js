@@ -12,6 +12,7 @@ export default function SubmitPost() {
     const [fileName, setFileName] = useState();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [community, setCommunity] = useState('');
     const { user } = useAuth0();
     const [showToast, setShowToast] = useState(false);
     const navigate = useNavigate();
@@ -33,9 +34,28 @@ export default function SubmitPost() {
         setContent(e.target.value);
     };
 
+    const options = [
+        { label: "General", value: 1 },
+        { label: "Informatics", value: 2 },
+        { label: "Psychology", value: 3 },
+        { label: "Business", value: 4 },
+    ];
+
+    const saveCommunity = (e) => {
+        setCommunity(e.target.value);
+    }
+
     const handlePost = async () => {
-        if (title.trim() === '' || content.trim() === '') {
-            alert('Title and content are required!');
+        if (title.trim() === '') {
+            alert('Title is required!');
+            return;
+        }
+        if (content.trim() === '') {
+            alert('Content is required!');
+            return;
+        }
+        if (community === '') {
+            alert('Community is required!');
             return;
         }
 
@@ -43,6 +63,7 @@ export default function SubmitPost() {
             user: { auth0id: user.sub },
             title: title,
             content: content,
+            community: community,
         };
 
         await createPost(postData);
@@ -54,7 +75,17 @@ export default function SubmitPost() {
     return (
         <div className='col-12 col-md-10 d-flex flex-column justify-content-center align-items-center border border-secondary text-break' id='container'>
             <label className="fw-bold fs-3 mb-3 text-center">Create a Post</label>
-            <div className="col-12 col-md-8 col-lg-6 custom-SubmitPost-container d-flex flex-column">
+
+            <div >
+                <select className="fs-5 form-select w-100 mb-4" onChange={saveCommunity} style={{ backgroundColor: 'rgb(59, 59, 59)', color: 'white' }}>
+                    <option value="" disabled selected>Select a community!</option>
+                    {options.map(option => (
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                    ))}
+                </select>
+
+            </div>
+            <div className="col-12 col-md-8 col-lg-6d-flex flex-column">
                 <textarea
                     className="border border-secondary rounded p-3 mb-3"
                     id="textPost"

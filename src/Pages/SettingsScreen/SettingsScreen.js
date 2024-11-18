@@ -29,6 +29,5 @@ export default function SettingsScreen() {
                 <div style={{ backgroundColor: 'white', height: '0.3vh' }}></div>
             </div>
         </div>
-
     );
 }

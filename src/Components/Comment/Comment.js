@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpLong, faDownLong } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from "react";
 import axios from "axios";
+import AOS from "aos";
 
 export default function Comment({ content, user: commentUser, creationDate, commentId }) {
     const { isAuthenticated, user } = useAuth0();
@@ -11,6 +12,12 @@ export default function Comment({ content, user: commentUser, creationDate, comm
     const [dislikeButton, setDislikeButton] = useState(false);
     const [likesCount, setLikesCount] = useState(0);
     const [disLikesCount, setDisLikesCount] = useState(0);
+
+    useEffect(() => {
+        AOS.init({
+            duration: 1300, 
+        });
+    }, []);
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -81,7 +88,7 @@ export default function Comment({ content, user: commentUser, creationDate, comm
     };
 
     return (
-        <div className="col-12 col-md-5 border-3 rounded-4 mt-3">
+        <div className="col-12 col-md-5 border-3 rounded-4 mt-3" data-aos="slide-up">
             <div className='col-12' style={{ backgroundColor: 'rgb(57, 57, 57)', height: '0.1vh' }}></div>
             <div className="d-flex flex-column justify-content-between mt-3" id='containerComment'>
                 <div className="d-flex align-items-center mb-2">

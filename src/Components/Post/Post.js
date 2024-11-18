@@ -6,6 +6,8 @@ import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function Post({ title, content, user: postUser, createdAt, postId }) {
     const { isAuthenticated, user } = useAuth0();
@@ -13,6 +15,12 @@ export default function Post({ title, content, user: postUser, createdAt, postId
     const [dislikeButton, setDislikeButton] = useState(0);
     const [likesCount, setLikesCount] = useState(0);
     const [disLikesCount, setDisLikesCount] = useState(0);
+
+    useEffect(() => {
+        AOS.init({
+            duration: 1300, 
+        });
+    }, []);
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -83,11 +91,11 @@ export default function Post({ title, content, user: postUser, createdAt, postId
     };
     
     return (
-        <div className="col-12 col-md-5 border-3 rounded-4 mt-5" style={{ position: 'relative' }}>
+        <div className="col-12 col-md-5 border-3 rounded-4 mt-5" style={{ position: 'relative' }} data-aos="zoom-in" >
             <div className='col-12' style={{ backgroundColor: 'rgb(57, 57, 57)', height: '0.1vh' }}></div>
 
             <div className="d-flex flex-column justify-content-between mt-3" id='containerPost'>
-                <Link to={`/post/${postId}`} style={{ textDecoration: 'none', position: 'absolute', top: 10, left: 0, right: 0, bottom: 20, zIndex: 1 }} />
+                <Link to={`/post/${postId}`} style={{ textDecoration: 'none', position: 'absolute', top: 10, left: 0, right: 0, bottom: 20, zIndex: 1 }}/>
 
                 <div className="d-flex align-items-center">
                     <a

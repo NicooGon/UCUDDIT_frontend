@@ -38,17 +38,17 @@ export default function TopBar() {
             </a>
 
             <div className='col-12 col-md-6 d-flex justify-content-center align-items-center mb-2 mb-md-0'>
-                <div className='rounded-start-pill d-flex align-items-center' id='searchIconContainer' style={{ padding: '0 1vh' }}>
+                <div className='rounded-start-pill d-flex align-items-center' id='searchIconContainer' style={{ padding: '1.6vh' }}>
                     <FontAwesomeIcon id='searchIcon' className='fs-5' icon={faMagnifyingGlass} />
                 </div>
                 <input
                     id='searchBar'
-                    placeholder='Search'
+                    placeholder='Search UCUDDIT!'
                     className='rounded-end-pill border-0 fs-5'
                     value={search}
                     onChange={saveSearch}
                     onKeyDown={handleKeyPress}
-                    style={{ width: '70%' }}
+                    style={{ width: '70%', padding:'1.6vh' }}
                 />
             </div>
 

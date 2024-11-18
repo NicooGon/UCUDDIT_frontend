@@ -1,8 +1,7 @@
 #leftBarContainer {
     background-color: black;
     color: #ffffff; 
-    position: fixed;
-    margin-top: 61px;
+    margin-top: 65px;
 }
 
 #homeButton:hover {

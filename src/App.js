@@ -10,6 +10,7 @@ import CommentsScreen from './Pages/CommentsScreen/CommentsScreen';
 import UserActivity from './Pages/UserActivityScreen/UserActivity';
 import PostsBySearch from './Pages/PostBySearch/PostBySearch';
 import LeftBar from './Components/LeftBar/LeftBar';
+import PostCommunityScreen from './Pages/PostCommunityScreen/PostCommunityScreen';
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <TopBar />
-        <div className="d-flex flex-column flex-md-row">
+        <div className="d-flex flex-column flex-md-row " style={{backgroundColor:"black"}}>
           <LeftBar />
           <Routes>
             <Route path="/" element={<MainScreen />} />
@@ -26,6 +27,7 @@ function App() {
             <Route path="/activity/user/:auth0id" element={<UserActivity />} />
             <Route path='/post/:postId' element={<CommentsScreen />} />
             <Route path='/posts/:search' element={<PostsBySearch />} />
+            <Route path='/postsCommunity/:community' element={<PostCommunityScreen/>}/>
           </Routes>
         </div>
       </header>

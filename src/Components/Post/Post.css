@@ -1,5 +1,6 @@
 #containerPost{
     background-color:black;
+    overflow: hidden;
 }
 
 #containerPost:hover{
