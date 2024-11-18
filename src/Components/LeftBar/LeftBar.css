@@ -1,7 +1,12 @@
 #leftBarContainer {
     background-color: black;
     color: #ffffff; 
+    margin-top: 60px;
+    border-top: black;
 }
+
+
+
 
 #homeButton:hover {
     background-color: rgb(61, 59, 59);

@@ -4,7 +4,8 @@ export default function SettingsScreen() {
     const { user } = useAuth0();
     return (
 
-        <div className='col-12 col-md-10 d-flex flex-column justify-content-evenly align-items-center border border-secondary text-break' style={{ minHeight: '95.1vh' }} id='container'>
+        <div className='col-12 col-md-10 d-flex flex-column justify-content-evenly align-items-center border border-secondary text-break' style={{ minHeight: '94.9vh' }} id='container'>
+
             <div
                 className='img-fluid rounded-circle border border-white'
                 style={{
@@ -16,18 +17,22 @@ export default function SettingsScreen() {
                     backgroundRepeat: 'no-repeat'
                 }}
             />
+
             <div className='col-5 text-break mb-4'>
                 <label style={{ fontSize: '2.5rem' }}>Name: {user?.given_name}</label>
                 <div className='col-12' style={{ backgroundColor: 'white', height: '0.3vh' }}></div>
             </div>
+
             <div className='col-5 text-break mb-4'>
                 <label style={{ fontSize: '2.5rem' }}>User: {user?.name}</label>
                 <div className='col-12' style={{ backgroundColor: 'white', height: '0.3vh' }}></div>
             </div>
+
             <div className='col-5 text-break mb-4'>
                 <label style={{ fontSize: '2.5rem' }}>Email: {user?.email}</label>
                 <div style={{ backgroundColor: 'white', height: '0.3vh' }}></div>
             </div>
+            
         </div>
     );
 }

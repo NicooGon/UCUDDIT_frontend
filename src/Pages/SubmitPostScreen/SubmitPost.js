@@ -85,6 +85,7 @@ export default function SubmitPost() {
                 </select>
 
             </div>
+
             <div className="col-12 col-md-8 col-lg-6d-flex flex-column">
                 <textarea
                     className="border border-secondary rounded p-3 mb-3"
@@ -100,6 +101,7 @@ export default function SubmitPost() {
                     onChange={saveTitle}
                     value={title}
                 />
+
                 <div className="border border-secondary rounded p-3 mb-3" id="textImage">
                     <textarea
                         id="textPost"

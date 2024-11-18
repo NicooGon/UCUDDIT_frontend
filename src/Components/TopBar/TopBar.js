@@ -23,7 +23,7 @@ export default function TopBar() {
         if (e.key === 'Enter') {
             if (search.trim() !== '') {
                 navigate(`/posts/${search}`);
-            } 
+            }
             else {
                 navigate(`/`);
             }
@@ -48,7 +48,7 @@ export default function TopBar() {
                     value={search}
                     onChange={saveSearch}
                     onKeyDown={handleKeyPress}
-                    style={{ width: '70%', padding:'1.6vh' }}
+                    style={{ width: '70%', padding: '1.6vh' }}
                 />
             </div>
 

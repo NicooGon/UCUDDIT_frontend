@@ -1,9 +1,12 @@
-#topBarContainer{
-    background-color: black;
+#topBarContainer {
     position: fixed;
-    z-index: 4;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: black;
+    padding-top: 10px; /* Ajusta según sea necesario */
 }
-
 #searchIconContainer{
     height: 30px;
     background-color:rgb(67, 67, 67);
