@@ -29,7 +29,8 @@ export default function PostCommunityScreen() {
                     params: { community }
                 });
                 setPosts(response.data);
-            } catch (error) {
+            } 
+            catch (error) {
                 console.error("Error fetching posts:", error);
             }
         };
@@ -41,7 +42,7 @@ export default function PostCommunityScreen() {
 
     return (
         <div className='col-12 col-md-10 d-flex flex-column align-items-center border-start border-secondary text-break' id='container'>
-            {communityLabel && <h3>You are in {communityLabel} community</h3>}
+            {communityLabel && <h3 className='mt-5'>You are in {communityLabel} community</h3>}
 
             {posts.length === 0 ? (
                 <p>No posts available for this community.</p>
